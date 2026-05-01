@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import { getRandomQuizNote, getWrongAnswers, type Note } from "@/lib/music";
 import { playFrequency } from "@/lib/audio";
 import StaffNote from "@/components/StaffNote";
+import PlayButton from "@/components/PlayButton";
 
 type AnswerState = "idle" | "correct" | "wrong";
 
@@ -94,17 +95,7 @@ export default function QuizPage() {
 
       {/* Question */}
       <div className="space-y-8">
-        <div className="flex items-center justify-between">
-          <h3 className="font-heading text-xl text-ink">Quelle est cette note ?</h3>
-          <button
-            onClick={() => playFrequency(quiz.currentNote.frequency)}
-            className="font-ui text-[11px] uppercase tracking-[0.15em] text-ink-mid
-              border border-cream-border hover:border-ink-soft/50 rounded-lg px-4 py-2
-              hover:text-ink transition-all duration-150"
-          >
-            Écouter
-          </button>
-        </div>
+        <h3 className="font-heading text-xl text-ink">Quelle est cette note ?</h3>
 
         {/* Staff */}
         <div className="flex justify-center">
@@ -140,6 +131,16 @@ export default function QuizPage() {
             </p>
           </div>
         )}
+
+        {/* Listen button above choices */}
+        <div className="flex justify-center">
+          <PlayButton
+            onPlay={() => playFrequency(quiz.currentNote.frequency)}
+            label="ÉCOUTER"
+            fullWidth={false}
+            className="!w-full sm:!w-auto !flex-none px-10 py-3"
+          />
+        </div>
 
         {/* Answer buttons */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">

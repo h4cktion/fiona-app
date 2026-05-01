@@ -4,6 +4,7 @@ import { useState } from "react";
 import { BASE_NOTES, INTERVALS, getIntervalNote, type Note } from "@/lib/music";
 import { playFrequency, playTwoNotes } from "@/lib/audio";
 import StaffNote from "@/components/StaffNote";
+import PlayButton from "@/components/PlayButton";
 
 export default function ExplorateurPage() {
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
@@ -38,7 +39,7 @@ export default function ExplorateurPage() {
               }}
               className={`
                 w-[4.5rem] h-[4.5rem] rounded-xl border font-display italic text-[1.75rem]
-                transition-all duration-200 focus:outline-none
+                transition-all duration-150 focus:outline-none active:scale-[0.94]
                 ${
                   selectedNote?.id === note.id
                     ? "bg-rose-light border-rose/40 text-rose shadow-sm"
@@ -143,23 +144,16 @@ function IntervalCard({
 
       {/* Actions */}
       <div className="flex gap-2">
-        <button
-          onClick={() => playFrequency(targetFrequency)}
-          className="flex-1 py-2 px-3 border border-cream-border hover:border-ink-soft/40
-            rounded-lg font-ui text-[11px] tracking-wide text-ink-mid hover:text-ink
-            transition-all duration-150"
-        >
-          Écouter la note
-        </button>
+        <PlayButton
+          onPlay={() => playFrequency(targetFrequency)}
+          label="Écouter la note"
+        />
         {!isUnison && (
-          <button
-            onClick={() => playTwoNotes(rootNote.frequency, targetFrequency)}
-            className="flex-1 py-2 px-3 bg-rose-light border border-rose/20
-              hover:border-rose/40 rounded-lg font-ui text-[11px] tracking-wide text-rose
-              transition-all duration-150"
-          >
-            Écouter l'intervalle
-          </button>
+          <PlayButton
+            onPlay={() => playTwoNotes(rootNote.frequency, targetFrequency)}
+            label="Écouter l'intervalle"
+            variant="accent"
+          />
         )}
       </div>
     </div>
