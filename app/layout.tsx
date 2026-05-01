@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Serif_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import AudioInit from "@/components/AudioInit";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
 
+        <AudioInit />
         <main className="max-w-5xl mx-auto px-8 py-14">{children}</main>
 
         <footer className="border-t border-cream-border py-8 mt-12">
